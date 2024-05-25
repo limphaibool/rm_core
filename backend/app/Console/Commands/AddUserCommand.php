@@ -35,6 +35,7 @@ class AddUserCommand extends Command
                 'username' => $username,
                 'password' => $password
             ]);
+            $this->info('User ' . $username . ' succesfully created');
         }
     }
 }
