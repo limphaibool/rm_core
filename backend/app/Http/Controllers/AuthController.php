@@ -10,6 +10,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         if (Auth::attempt($request->only('username', 'password'))) {
+            $request->session()->regenerate();
             return response()->json([
                 'message' => 'Login Success',
                 'data' => Auth::user()
