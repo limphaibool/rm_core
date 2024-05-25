@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class UserRoleController extends Controller
+class RoleUserController extends Controller
 {
     /**
      * See all users in a subset role
@@ -20,6 +20,19 @@ class UserRoleController extends Controller
     public function store(Request $request)
     {
         //
+    }
+
+    public function show($id)
+    {
+
+    }
+    public function update($id)
+    {
+
+    }
+    public function destroy($id)
+    {
+
     }
 
 }
