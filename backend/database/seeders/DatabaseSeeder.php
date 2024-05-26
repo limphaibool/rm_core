@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Permission;
+use App\Models\Resource;
+use App\Models\ResourceAction;
 use App\Models\Role;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\User;
@@ -23,7 +26,40 @@ class DatabaseSeeder extends Seeder
 
         Role::create([
             'name' => 'MD',
-            'level' => 0
+        ]);
+
+        Resource::create(['name' => 'roles']);
+        ResourceAction::insert([
+            [
+                'code' => 'READ',
+                'name' => 'Read'
+            ],
+            [
+                'code' => 'CREATE',
+                'name' => 'Create'
+            ],
+            [
+                'code' => 'UPDATE',
+                'name' => 'Update'
+            ],
+            [
+                'code' => 'DELETE',
+                'name' => 'Delete'
+            ],
+        ]);
+        Permission::insert([
+            [
+                'resource_id' => 1,
+                'resource_action_id' => 1,
+            ],
+            [
+                'resource_id' => 1,
+                'resource_action_id' => 2,
+            ],
+            [
+                'resource_id' => 1,
+                'resource_action_id' => 3,
+            ],
         ]);
     }
 }

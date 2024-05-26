@@ -10,10 +10,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('permissions', function (Blueprint $table) {
-            $table->id('permission_id');
-            $table->foreignId('resource_id')->constrained('resources', 'resource_id')->restrictOnDelete();
-            $table->foreignId('action_id')->constrained('resource_actions', 'action_id')->restrictOnDelete();
+        Schema::create('menus', function (Blueprint $table) {
+            $table->id();
+            $table->string('code');
+            $table->string('name');
+            $table->unsignedBigInteger('parent_id')->nullable();
             $table->timestamps();
         });
     }
@@ -23,6 +24,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('permissions');
+        Schema::dropIfExists('menus');
     }
 };
