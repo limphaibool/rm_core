@@ -5,11 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class Resource extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'name',
-    ];
-    protected $primaryKey = 'role_id';
+    protected $fillable = ['name'];
+    protected $primaryKey = 'resource_id';
 }
