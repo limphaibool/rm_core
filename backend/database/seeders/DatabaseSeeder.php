@@ -17,49 +17,62 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
+        User::updateOrCreate(['id' => 1], [
+            'id' => 1,
             'name' => 'Thiti Lim',
             'username' => 'thiti',
             'password' => '1234',
 
         ]);
 
-        Role::create([
-            'name' => 'MD',
-        ]);
+        Resource::updateOrCreate(['name' => 'roles']);
 
-        Resource::create(['name' => 'roles']);
-        ResourceAction::insert([
+        $resources = [
+            ['resource_id' => 1, 'name' => 'roles'],
+            ['resource_id' => 2, 'name' => 'inventory'],
+            ['resource_id' => 3, 'name' => 'inventory_move'],
+            ['resource_id' => 4, 'name' => 'inventory_start'],
+            ['resource_id' => 5, 'name' => 'inventory_finish'],
+
+        ];
+
+        $actions = [
             [
+                'action_id' => 1,
                 'code' => 'READ',
                 'name' => 'Read'
             ],
             [
+                'action_id' => 2,
                 'code' => 'CREATE',
                 'name' => 'Create'
             ],
             [
+                'action_id' => 3,
                 'code' => 'UPDATE',
                 'name' => 'Update'
             ],
             [
+                'action_id' => 4,
                 'code' => 'DELETE',
                 'name' => 'Delete'
             ],
-        ]);
-        Permission::insert([
-            [
-                'resource_id' => 1,
-                'resource_action_id' => 1,
-            ],
-            [
-                'resource_id' => 1,
-                'resource_action_id' => 2,
-            ],
-            [
-                'resource_id' => 1,
-                'resource_action_id' => 3,
-            ],
-        ]);
+        ];
+        foreach ($resources as $resource) {
+            Resource::updateOrCreate(['resource_id' => $resource['resource_id']], $resource);
+        }
+        foreach ($actions as $action) {
+            ResourceAction::updateOrCreate(['action_id' => $action['action_id']], $action);
+        }
+
+        foreach (Resource::all() as $resource) {
+
+            foreach (ResourceAction::all() as $action) {
+                Permission::create([
+                    'resource_id' => $resource->resource_id,
+                    'action_id' => $action->action_id
+                ]);
+            }
+        }
     }
 }
