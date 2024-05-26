@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('resource_actions', function (Blueprint $table) {
-            $table->id('resource_action_id');
+            $table->id('action_id');
             $table->string('code');
             $table->string('name');
             $table->timestamps();
