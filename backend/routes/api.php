@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\UserController;
@@ -29,6 +30,9 @@ Route::prefix('admin')->group(function () {
 
     Route::get('roles/{role_id}/users', [RolePermissionController::class, 'index']);
     Route::post('roles/{role_id}/users', [RolePermissionController::class, 'store']);
+
+    Route::get('/menus', [MenuController::class, 'index']);
+
 
 });
 
