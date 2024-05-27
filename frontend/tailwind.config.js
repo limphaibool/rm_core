@@ -4,6 +4,7 @@
 module.exports = {
   content: ["./src/**/*.{vue,js}"],
   darkMode: "class", // This enables dark mode based on the presence of the "dark" class in the HTML tag
+  plugins: [require("@tailwindcss/forms")],
   theme: {
     extend: {
       colors: {

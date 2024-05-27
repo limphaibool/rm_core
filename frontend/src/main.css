@@ -3,17 +3,17 @@
 @tailwind utilities;
 
 :root {
-    --primary-50: 236, 253, 245;    /* Lightest tint */
-    --primary-100: 226, 247, 237;   /* Very light */
-    --primary-200: 196, 227, 212;   /* Light */
-    --primary-300: 166, 208, 188;   /* Appropriately placed here */
-    --primary-400: 150, 188, 170;   /* Slightly darker than base */
-    --primary-500: 134, 168, 152;   /* Noticeably darker, deeper */
-    --primary-600: 118, 148, 134;   /* Even more depth */
-    --primary-700: 102, 128, 116;   /* Dark, rich tone */
-    --primary-800: 86, 108, 98;     /* Darker, closer to black */
-    --primary-900: 70, 88, 80;      /* Very dark */
-    --primary-950: 54, 68, 62;      /* Darkest tint */
+    --primary-50: 236, 253, 245;   /* Lightest tint, much lighter than the base */
+    --primary-100: 221, 242, 231;  /* Slightly lighter, preparing transition */
+    --primary-200: 206, 231, 218;  /* Closer to the base, lighter */
+    --primary-300: 191, 220, 205;  /* Gradually approaching the base */
+    --primary-400: 179, 214, 196;  /* Nearing the base color */
+    --primary-500: 166, 208, 188;  /* Base color */
+    --primary-600: 149, 187, 169;  /* Slightly darker than base */
+    --primary-700: 132, 166, 150;  /* Darker, more subdued */
+    --primary-800: 115, 145, 131;  /* Even darker, moving towards depth */
+    --primary-900: 98, 124, 112;   /* Deep and dark */
+    --primary-950: 82, 103, 93;    /* Darkest tint, very deep */
     --secondary-50: 241, 229, 238;    /* Lightest tint, significantly lighter */
     --secondary-100: 226, 209, 224;   /* Very light */
     --secondary-200: 211, 189, 210;   /* Light */

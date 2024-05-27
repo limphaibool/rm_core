@@ -1,13 +1,12 @@
 <script setup lang="ts">
 </script>
 <template>
-    <div class="flex flex-col min-h-screen">
-        <header
-            class="h-16 bg-secondary-900 text-orange-100 font-bold align-middle flex justify-between items-center p-6">
+    <div class="flex flex-col min-h-screen bg-gradient-to-b from-50% from-secondary-950 to-sky-950">
+        <header class=" text-primary-400 font-bold align-middle flex justify-between items-center p-6">
             QUALITY CERAMIC
         </header>
         <div class="flex-grow flex">
-            <main class="flex-grow p-4 bg-secondary-900">
+            <main class="flex-grow p-4">
                 <RouterView />
             </main>
         </div>
