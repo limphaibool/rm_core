@@ -1,17 +1,22 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AuthMenuController;
+use App\Http\Controllers\AuthPermissionController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\UserController;
+use App\Models\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('auth')->group(function () {
-    Route::post('auth/login', [AuthController::class, 'login']);
-    Route::post('auth/logout', [AuthController::class, 'logout']);
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::get('menus', [AuthMenuController::class, 'index']);
+    Route::get('permissions', [AuthPermissionController::class, 'index']);
 });
 
 Route::prefix('admin')->group(function () {
@@ -31,7 +36,6 @@ Route::prefix('admin')->group(function () {
     Route::get('roles/{role_id}/users', [RolePermissionController::class, 'index']);
     Route::post('roles/{role_id}/users', [RolePermissionController::class, 'store']);
 
-    Route::get('/menus', [MenuController::class, 'index']);
 
 
 });

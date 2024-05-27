@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class MenuController extends Controller
+class AuthMenuController extends Controller
 {
     /**
      * If users have a RESOURCE permission in any menu descendants or the menu itself, then they will have access to that menu
