@@ -18,6 +18,10 @@ Route::prefix('auth')->group(function () {
     Route::get('menus', [AuthMenuController::class, 'index']);
     Route::get('permissions', [AuthPermissionController::class, 'index']);
 });
+Route::prefix('auth')->middleware('auth:sanctum')->group(function () {
+    Route::get('menus', [AuthMenuController::class, 'index']);
+    Route::get('permissions', [AuthPermissionController::class, 'index']);
+});
 
 Route::prefix('admin')->group(function () {
     Route::get('/users', [UserController::class, 'index']);

@@ -3,6 +3,7 @@ import HomeView from "../views/HomeView.vue";
 import LoginView from "../views/Auth/LoginView.vue";
 import MainLayout from "../layouts/MainLayout.vue";
 import GuestLayout from "../layouts/GuestLayout.vue";
+import { useAuthStore } from "../stores/auth";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,6 +20,20 @@ const router = createRouter({
       children: [{ path: "", component: LoginView }],
     },
   ],
+});
+
+router.beforeEach((to, _from, next) => {
+  const authStore = useAuthStore(); // Access your authentication store
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+  console.log(authStore.isLoggedIn());
+
+  if (requiresAuth && !authStore.isLoggedIn()) {
+    next({ path: "/login" });
+  } else if (!requiresAuth && authStore.isLoggedIn()) {
+    next({ path: "/" });
+  } else {
+    next(); // Proceed to route
+  }
 });
 
 export default router;
