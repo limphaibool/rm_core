@@ -10,4 +10,9 @@ class Resource extends Model
     use HasFactory;
     protected $fillable = ['name'];
     protected $primaryKey = 'resource_id';
+
+    public function permissions()
+    {
+        return $this->hasMany(Permission::class, 'resource_id');
+    }
 }

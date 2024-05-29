@@ -40,6 +40,7 @@ Route::prefix('admin')->group(function () {
     Route::get('roles/{role_id}/users', [RolePermissionController::class, 'index']);
     Route::post('roles/{role_id}/users', [RolePermissionController::class, 'store']);
 
+    Route::get('/modules')
 
 
 });

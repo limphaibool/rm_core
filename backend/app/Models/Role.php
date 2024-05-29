@@ -12,6 +12,11 @@ class Role extends Model
     protected $fillable = [
         'name',
     ];
+    public function getLocalKeyName()
+    {
+        return 'role_id';
+
+    }
     public function permissions(): BelongsToMany
     {
         return $this->belongsToMany(Permission::class, 'roles_permissions', 'role_id', 'permission_id');

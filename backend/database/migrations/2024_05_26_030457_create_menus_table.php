@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('code');
             $table->string('name');
+            $table->string('url')->nullable();
             $table->foreignId('resource_id')->nullable()->constrained('resources', 'resource_id')->nullOnDelete();
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->timestamps();
