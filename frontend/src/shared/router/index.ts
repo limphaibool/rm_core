@@ -4,7 +4,7 @@ import LoginView from "../views/Auth/LoginView.vue";
 import MainLayout from "../layouts/MainLayout.vue";
 import GuestLayout from "../layouts/GuestLayout.vue";
 import { useAuthStore } from "../stores/auth";
-import { adminRoutes } from "../admin/routes";
+import { adminRoutes } from "../../admin/routes";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

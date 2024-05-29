@@ -1,12 +1,12 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
-import router from "./router";
+import router from "./shared/router";
 import PrimeVue from "primevue/config";
 // @ts-ignore
-import Lara from "./presets/lara";
+import Lara from "./shared/presets/lara";
 import App from "./App.vue";
 import "./axios";
-import { useAuthStore } from "./stores/auth";
+import { useAuthStore } from "./shared/stores/auth";
 
 const pinia = createPinia();
 const app = createApp(App);
