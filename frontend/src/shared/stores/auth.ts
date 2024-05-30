@@ -17,7 +17,6 @@ export const useAuthStore = defineStore("auth", {
 
     async getPermissions() {
       const res = await axios.get("/auth/permissions");
-      console.log(res.data.data);
       this.authPermissions = res.data.data;
     },
 
