@@ -1,6 +1,6 @@
-interface User {
+export interface User {
   id: number;
   name: string;
   username: string;
-  role: Role;
+  role_id: number;
 }

@@ -1,12 +1,15 @@
 import { ref } from "vue";
 import axios from "axios";
-import { UserResponse } from "../../interfaces/responses/UserResponse";
+import { UserListResponse } from "../../interfaces/responses/UserListResponse";
+import { User } from "../../interfaces/User";
 
 export default function useUsers() {
-  const users = ref([]);
+  const users = ref<User[]>([]);
   const getUsers = async () => {
     try {
-      const res = await axios.get<UserResponse>("/admin/users");
+      const res = await axios.get<UserListResponse>("/admin/users");
+      users.value = res.data.data;
+      console.log(res.data);
     } catch (e) {
       console.log(e);
     }
@@ -14,4 +17,6 @@ export default function useUsers() {
   const getUserById = async () => {};
 
   const createUser = async () => {};
+
+  return { users, getUsers, getUserById, createUser };
 }
