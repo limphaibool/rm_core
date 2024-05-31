@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthMenuController;
 use App\Http\Controllers\AuthPermissionController;
+use App\Http\Controllers\AuthUserController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RolePermissionController;
@@ -21,6 +22,8 @@ Route::prefix('auth')->group(function () {
 Route::prefix('auth')->middleware('auth:sanctum')->group(function () {
     Route::get('menus', [AuthMenuController::class, 'index']);
     Route::get('permissions', [AuthPermissionController::class, 'index']);
+    Route::get('user', [AuthUserController::class, 'show']);
+    Route::patch('user', [AuthUserController::class, 'update']);
 });
 
 Route::prefix('admin')->group(function () {

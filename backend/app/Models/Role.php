@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
 class Role extends Model
 {
-    use HasFactory;
+    use HasFactory, HasRecursiveRelationships;
     protected $fillable = [
-        'name',
+        'role_name',
+        'parent_id'
     ];
     public function getLocalKeyName()
     {
