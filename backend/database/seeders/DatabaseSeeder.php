@@ -17,12 +17,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::updateOrCreate(['id' => 1], [
-            'id' => 1,
+        User::updateOrCreate(['user_id' => 1], [
+            'user_id' => 1,
             'name' => 'Thiti Lim',
             'username' => 'thiti',
             'password' => '1234',
-
+            'name_thai' => 'ธิติ',
+            'name_eng' => 'Thiti',
+            'email' => 'thiti@thiti.com',
         ]);
 
         Resource::updateOrCreate(['name' => 'roles']);
