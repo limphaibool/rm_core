@@ -2,10 +2,10 @@
 
 namespace App\Enums;
 
-enum ResponseStatus: int
+abstract class ResponseStatus
 {
-    case SUCCESS = 0;
-    case ERROR = 1;
-    case UNAUTHENTICATED = 2;
-    case UNAUTHORIZED = 3;
+    const SUCCESS = 0;
+    const ERROR = 1;
+    const UNAUTHENTICATED = 2;
+    const UNAUTHORIZED = 3;
 }

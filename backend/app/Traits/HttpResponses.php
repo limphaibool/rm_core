@@ -10,13 +10,13 @@ trait HttpResponses
     protected function success($message = 'Success', $data = null)
     {
         return response()->json([
-            'status' => ResponseStatus::SUCCESS->value,
+            'status' => ResponseStatus::SUCCESS,
             'message' => $message,
             'data' => $data
         ], Response::HTTP_OK);
     }
 
-    protected function error($status = ResponseStatus::ERROR->value, $message = 'Error', $data = null)
+    protected function error($status = ResponseStatus::ERROR, $message = 'Error', $data = null)
     {
         return response()->json([
             'status' => $status,
@@ -27,7 +27,7 @@ trait HttpResponses
     protected function unauthenticated()
     {
         return response()->json([
-            'status' => ResponseStatus::UNAUTHENTICATED->value,
+            'status' => ResponseStatus::UNAUTHENTICATED,
             'message' => 'Unauthenticated',
             'data' => null
         ], Response::HTTP_UNAUTHORIZED);
@@ -35,7 +35,7 @@ trait HttpResponses
     protected function unauthorized()
     {
         return response()->json([
-            'status' => ResponseStatus::UNAUTHORIZED->value,
+            'status' => ResponseStatus::UNAUTHORIZED,
             'message' => 'Unauthorized',
             'data' => null
         ], Response::HTTP_FORBIDDEN);

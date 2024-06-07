@@ -42,7 +42,7 @@ class AuthenticationTest extends TestCase
 
         // Assert
         $response->assertOk();
-        $response->assertJsonPath('status', ResponseStatus::SUCCESS->value);
+        $response->assertJsonPath('status', ResponseStatus::SUCCESS);
         $response->assertJsonPath('data.id', $user->user_id);
         $this->assertAuthenticatedAs($user);
         $response->assertCookie('laravel_session');
@@ -70,7 +70,7 @@ class AuthenticationTest extends TestCase
 
         // Assert
         $response->assertUnauthorized();
-        $response->assertJsonPath('status', ResponseStatus::UNAUTHENTICATED->value);
+        $response->assertJsonPath('status', ResponseStatus::UNAUTHENTICATED);
     }
 
     public function test_logout_success()
@@ -93,7 +93,7 @@ class AuthenticationTest extends TestCase
         $response = $this->post('/api/auth/logout');
 
         // Assert
-        $response->assertJsonPath('status', ResponseStatus::SUCCESS->value);
+        $response->assertJsonPath('status', ResponseStatus::SUCCESS);
         $response->assertOk();
     }
 
@@ -121,6 +121,6 @@ class AuthenticationTest extends TestCase
         // Assert
         $this->withExceptionHandling();
         $response->assertUnauthorized();
-        $response->assertJsonPath('status', ResponseStatus::UNAUTHENTICATED->value);
+        $response->assertJsonPath('status', ResponseStatus::UNAUTHENTICATED);
     }
 }
