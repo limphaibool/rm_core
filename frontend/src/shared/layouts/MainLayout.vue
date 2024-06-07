@@ -1,19 +1,14 @@
-<script setup lang="ts">
-
-
-</script>
 <template>
-    <div class="flex flex-col min-h-screen bg-gradient-to-l from-primary-300 to-white  ">
-        <header
-            class="m-3 rounded-md bg-secondary-900 font-bold align-middle flex space-x-4 items-center p-6 shadow-xl">
-            <div class="text-primary-200">
+    <div class="flex flex-col min-h-screen bg-gradient-to-br from-primary-200 to-white">
+        <header class="bg-white font-bold align-middle flex space-x-4 items-center p-6 shadow-gray-300 shadow-md">
+            <div class="pl-5 text-secondary-950">
                 QUALITY CERAMIC
             </div>
         </header>
         <div class="flex-grow flex ">
-            <div class="bg-slate-800 text-white p-4 w-60 mb-3 ml-3 rounded-md shadow-md flex flex-col">
-                <RouterLink :to="{ name: 'users' }" class="p-2 hover:bg-slate-600 rounded">Users</RouterLink>
-                <RouterLink :to="{ name: 'roles' }" class="p-2 hover:bg-slate-600 rounded">Roles</RouterLink>
+            <div class="bg-white shadow-gray-400 p-4 w-72 mt-6 mb-5 ml-5 rounded-xl shadow-sm flex flex-col">
+                <PanelMenu :model="menuItems">
+                </PanelMenu>
             </div>
             <main class="flex-grow p-4">
                 <RouterView />
@@ -21,3 +16,116 @@
         </div>
     </div>
 </template>
+<script setup lang="ts">
+import { MenuItem } from 'primevue/menuitem';
+import PanelMenu from 'primevue/panelmenu';
+import { ref } from 'vue';
+const menuItems = ref<MenuItem[]>([
+    {
+        label: 'จัดการ User',
+        items: [
+            {
+                label: 'จัดการ User',
+                url: '/admin/users',
+
+            },
+            {
+                label: 'Available users',
+                url: '/admin/users',
+            }
+        ]
+    },
+    {
+        label: 'จัดการ Role',
+        items: [
+            {
+                label: 'Roles',
+                url: '/admin/users',
+
+            },
+        ]
+    },
+]);
+const items = ref([
+    {
+        label: 'Files',
+        icon: 'pi pi-file',
+        items: [
+            {
+                label: 'Documents',
+                icon: 'pi pi-file',
+                items: [
+                    {
+                        label: 'Invoices',
+                        icon: 'pi pi-file-pdf',
+                        items: [
+                            {
+                                label: 'Pending',
+                                icon: 'pi pi-stop'
+                            },
+                            {
+                                label: 'Paid',
+                                icon: 'pi pi-check-circle'
+                            }
+                        ]
+                    },
+                    {
+                        label: 'Clients',
+                        icon: 'pi pi-users'
+                    }
+                ]
+            },
+            {
+                label: 'Images',
+                icon: 'pi pi-image',
+                items: [
+                    {
+                        label: 'Logos',
+                        icon: 'pi pi-image'
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        label: 'Cloud',
+        icon: 'pi pi-cloud',
+        items: [
+            {
+                label: 'Upload',
+                icon: 'pi pi-cloud-upload'
+            },
+            {
+                label: 'Download',
+                icon: 'pi pi-cloud-download'
+            },
+            {
+                label: 'Sync',
+                icon: 'pi pi-refresh'
+            }
+        ]
+    },
+    {
+        label: 'Devices',
+        icon: 'pi pi-desktop',
+        items: [
+            {
+                label: 'Phone',
+                icon: 'pi pi-mobile'
+            },
+            {
+                label: 'Desktop',
+                icon: 'pi pi-desktop'
+            },
+            {
+                label: 'Tablet',
+                icon: 'pi pi-tablet'
+            }
+        ]
+    }
+]);
+
+
+
+
+</script>

@@ -7,6 +7,15 @@ module.exports = {
   plugins: [require("@tailwindcss/forms")],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["Kanit", "ui-sans-serif", "system-ui"],
+      },
+      fontWeight: {
+        normal: 400,
+        medium: 500,
+        bold: 700,
+        extrabold: 800,
+      },
       colors: {
         primary: "rgb(var(--primary))",
         "primary-inverse": "rgb(var(--primary-inverse))",
