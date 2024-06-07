@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\HttpResponses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthUserController extends Controller
 {
+    use HttpResponses;
 
     public function show()
     {
-        return Auth::user();
+        return $this->success(data: Auth::user());
     }
 
     /**

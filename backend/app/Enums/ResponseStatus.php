@@ -4,8 +4,8 @@ namespace App\Enums;
 
 abstract class ResponseStatus
 {
-    const SUCCESS = 0;
-    const ERROR = 1;
-    const UNAUTHENTICATED = 2;
-    const UNAUTHORIZED = 3;
+    const SUCCESS = 1;
+    const ERROR = 2;
+    const UNAUTHENTICATED = 3;
+    const UNAUTHORIZED = 4;
 }
