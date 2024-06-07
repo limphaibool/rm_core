@@ -11,9 +11,13 @@ import { useAuthStore } from "./shared/stores/auth";
 const pinia = createPinia();
 const app = createApp(App);
 app.use(pinia);
+
 const authStore = useAuthStore();
-await authStore.getPermissions();
+try {
+  await authStore.getUser();
+} catch {}
 
 app.use(router);
+
 app.use(PrimeVue, { unstyled: true, pt: Lara });
 app.mount("#app");
