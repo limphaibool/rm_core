@@ -25,9 +25,11 @@ export const useAuthStore = defineStore("auth", {
       const res = await axios.get("/auth/permissions");
       this.authPermissions = res.data.data ?? null;
     },
-
     isLoggedIn() {
       return this.authUser != null;
+    },
+    clearUser() {
+      this.authUser = null;
     },
   },
 });
