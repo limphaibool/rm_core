@@ -25,7 +25,6 @@
 
         </div>
     </div>
-
 </template>
 <script setup lang="ts">
 import InputText from 'primevue/inputtext';
@@ -35,7 +34,7 @@ import InputGroupAddon from 'primevue/inputgroupaddon';
 import { ref } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
-import { useAuthStore } from '../../stores/auth';
+import { useAuthStore } from '../stores/auth';
 const authStore = useAuthStore();
 const router = useRouter();
 const form = ref({
