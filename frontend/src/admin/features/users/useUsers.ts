@@ -1,7 +1,7 @@
 import { ref } from "vue";
 import axios from "axios";
 import { UserListResponse } from "../../interfaces/responses/UserListResponse";
-import { User } from "../../interfaces/User";
+import { User } from "../../../shared/interfaces/User";
 
 export default function useUsers() {
   const users = ref<User[]>([]);

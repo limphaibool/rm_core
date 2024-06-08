@@ -4,6 +4,7 @@ import LoginView from "../views/LoginView.vue";
 import ProfileView from "../views/ProfileView.vue";
 import MainLayout from "../layouts/MainLayout.vue";
 import GuestLayout from "../layouts/GuestLayout.vue";
+import TopBarOnlyLayout from "../layouts/TopBarOnlyLayout.vue";
 import { useAuthStore } from "../stores/auth";
 import { adminRoutes } from "../../admin/routes";
 

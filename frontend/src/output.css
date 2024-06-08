@@ -454,6 +454,8 @@ video {
   font-weight: normal;
 
   font-style: normal;
+
+  unicode-range: U+0E00-U+0E7F;
 }
 
 @font-face {
@@ -464,6 +466,8 @@ video {
   font-weight: normal;
 
   font-style: italic;
+
+  unicode-range: U+0E00-U+0E7F;
 }
 
 @font-face {
@@ -474,6 +478,8 @@ video {
   font-weight: bold;
 
   font-style: normal;
+
+  unicode-range: U+0E00-U+0E7F;
 }
 
 @font-face {
@@ -484,6 +490,8 @@ video {
   font-weight: bold;
 
   font-style: italic;
+
+  unicode-range: U+0E00-U+0E7F;
 }
 
 @font-face {
@@ -494,6 +502,8 @@ video {
   font-weight: 900;
 
   font-style: normal;
+
+  unicode-range: U+0E00-U+0E7F;
 }
 
 @font-face {
@@ -504,6 +514,8 @@ video {
   font-weight: 900;
 
   font-style: italic;
+
+  unicode-range: U+0E00-U+0E7F;
 }
 
 @font-face {
@@ -514,6 +526,8 @@ video {
   font-weight: 800;
 
   font-style: normal;
+
+  unicode-range: U+0E00-U+0E7F;
 }
 
 @font-face {
@@ -524,6 +538,8 @@ video {
   font-weight: 800;
 
   font-style: italic;
+
+  unicode-range: U+0E00-U+0E7F;
 }
 
 @font-face {
@@ -534,6 +550,8 @@ video {
   font-weight: 300;
 
   font-style: normal;
+
+  unicode-range: U+0E00-U+0E7F;
 }
 
 @font-face {
@@ -544,6 +562,8 @@ video {
   font-weight: 300;
 
   font-style: italic;
+
+  unicode-range: U+0E00-U+0E7F;
 }
 
 @font-face {
@@ -554,6 +574,8 @@ video {
   font-weight: 500;
 
   font-style: normal;
+
+  unicode-range: U+0E00-U+0E7F;
 }
 
 @font-face {
@@ -564,6 +586,8 @@ video {
   font-weight: 500;
 
   font-style: italic;
+
+  unicode-range: U+0E00-U+0E7F;
 }
 
 @font-face {
@@ -574,6 +598,8 @@ video {
   font-weight: 600;
 
   font-style: normal;
+
+  unicode-range: U+0E00-U+0E7F;
 }
 
 @font-face {
@@ -584,6 +610,8 @@ video {
   font-weight: 600;
 
   font-style: italic;
+
+  unicode-range: U+0E00-U+0E7F;
 }
 
 @font-face {
@@ -594,6 +622,8 @@ video {
   font-weight: 100;
 
   font-style: normal;
+
+  unicode-range: U+0E00-U+0E7F;
 }
 
 @font-face {
@@ -604,6 +634,8 @@ video {
   font-weight: 100;
 
   font-style: italic;
+
+  unicode-range: U+0E00-U+0E7F;
 }
 
 @font-face {
@@ -614,6 +646,8 @@ video {
   font-weight: 200;
 
   font-style: normal;
+
+  unicode-range: U+0E00-U+0E7F;
 }
 
 @font-face {
@@ -624,6 +658,8 @@ video {
   font-weight: 200;
 
   font-style: italic;
+
+  unicode-range: U+0E00-U+0E7F;
 }
 
 *, ::before, ::after {
@@ -1114,6 +1150,10 @@ video {
   margin-bottom: 1.25rem;
 }
 
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
 .mb-\[-0\.5715rem\] {
   margin-bottom: -0.5715rem;
 }
@@ -1220,6 +1260,10 @@ video {
 
 .mt-\[-0\.5rem\] {
   margin-top: -0.5rem;
+}
+
+.mb-3 {
+  margin-bottom: 0.75rem;
 }
 
 .box-border {
@@ -2088,6 +2132,12 @@ video {
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+
+.space-y-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
 }
 
 .self-center {
