@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import LoginView from "../views/LoginView.vue";
+import ProfileView from "../views/ProfileView.vue";
 import MainLayout from "../layouts/MainLayout.vue";
 import GuestLayout from "../layouts/GuestLayout.vue";
 import { useAuthStore } from "../stores/auth";
@@ -12,7 +13,19 @@ const router = createRouter({
     {
       path: "/",
       component: () => MainLayout,
-      children: [{ path: "", component: HomeView }, ...adminRoutes],
+      children: [
+        {
+          path: "",
+          name: "home",
+          component: HomeView,
+        },
+        {
+          path: "/profile",
+          name: "profile",
+          component: ProfileView,
+        },
+        ...adminRoutes,
+      ],
       meta: { requiresAuth: true },
     },
     {

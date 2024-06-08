@@ -6,7 +6,7 @@
         </div>
         <div class="space-x-2 pr-3">
             <Button icon="pi pi-user" class="text-primary-900 bg-white hover:bg-primary-800 hover:text-white" text
-                aria-label="Profile" size="large" />
+                aria-label="Profile" size="large" @click="() => router.push({ name: 'profile' })" />
             <Button icon="pi pi-sign-out" class="text-primary-900 bg-white hover:bg-primary-800 hover:text-white " text
                 aria-label="Logout" size="large" @click="handleLogout" />
         </div>
