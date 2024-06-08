@@ -1,15 +1,9 @@
 <template>
     <div class="flex flex-col min-h-screen bg-gradient-to-br from-primary-200 to-white">
-        <header class="bg-white font-bold align-middle flex space-x-4 items-center p-6 shadow-gray-300 shadow-md">
-            <div class="pl-5 text-secondary-950">
-                QUALITY CERAMIC
-            </div>
-        </header>
+        <TopBar />
         <div class="flex-grow flex ">
-            <div class="bg-white shadow-gray-400 p-2 w-72 mt-6 mb-5 ml-5 rounded-xl shadow-sm flex flex-col">
-                <Menu :model="menuItems" class="border-0 text-xl" />
-            </div>
-            <main class="flex-grow p-4">
+            <MenuBar :menus="menuItems" />
+            <main class="flex-grow p-6">
                 <RouterView />
             </main>
         </div>
@@ -17,8 +11,8 @@
 </template>
 <script setup lang="ts">
 import { MenuItem } from 'primevue/menuitem';
-import PanelMenu from 'primevue/panelmenu';
-import Menu from 'primevue/menu';
+import TopBar from '../components/TopBar.vue';
+import MenuBar from '../components/MenuBar.vue';
 import { ref } from 'vue';
 const menuItems = ref<MenuItem[]>([
     {
@@ -135,8 +129,4 @@ const items = ref([
         ]
     }
 ]);
-
-
-
-
 </script>

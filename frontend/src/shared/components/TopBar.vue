@@ -1,10 +1,9 @@
 <template>
-    <div class="fixed h-20 w-full bg-white shadow-md">
-        quality ceramic
-
-    </div>
+    <header class="bg-white font-bold align-middle flex space-x-4 items-center p-6 shadow-gray-300 shadow-md">
+        <div class="pl-5 text-secondary-700">
+            QUALITY CERAMIC
+        </div>
+    </header>
 </template>
-
-<script lang="ts">
-
+<script setup lang="ts">
 </script>
