@@ -6,9 +6,8 @@
             </div>
         </header>
         <div class="flex-grow flex ">
-            <div class="bg-white shadow-gray-400 p-4 w-72 mt-6 mb-5 ml-5 rounded-xl shadow-sm flex flex-col">
-                <PanelMenu :model="menuItems">
-                </PanelMenu>
+            <div class="bg-white shadow-gray-400 p-2 w-72 mt-6 mb-5 ml-5 rounded-xl shadow-sm flex flex-col">
+                <Menu :model="menuItems" class="border-0 text-xl" />
             </div>
             <main class="flex-grow p-4">
                 <RouterView />
@@ -19,8 +18,20 @@
 <script setup lang="ts">
 import { MenuItem } from 'primevue/menuitem';
 import PanelMenu from 'primevue/panelmenu';
+import Menu from 'primevue/menu';
 import { ref } from 'vue';
 const menuItems = ref<MenuItem[]>([
+    {
+        label: 'จัดการผู้ใช้',
+        url: '/admin/users',
+    },
+    {
+        label: 'จัดการตําแหน่ง',
+        url: '/admin/roles',
+    },
+
+])
+const panelMenuItems = ref<MenuItem[]>([
     {
         label: 'จัดการ User',
         items: [
