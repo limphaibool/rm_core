@@ -106,7 +106,7 @@
 
   @font-face {
     font-family: 'Kanit';
-    src: url('../assets/fonts/Kanit-BoldItalic.ttf') format('truetype');
+    src: url('../assets/fonts/Kanit-SemiBoldItalic.ttf') format('truetype');
     font-weight: bold;
     font-style: italic;
   }
