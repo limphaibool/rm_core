@@ -16,7 +16,7 @@
                     </InputGroupAddon>
                     <InputText v-model="form.password" />
                 </InputGroup>
-                <Button class="bg-primary-500" @click="handleLogin">
+                <Button class="bg-primary-500" @click="login">
                     <div class="text-gray-900">
                         Log In
                     </div>
@@ -31,24 +31,7 @@ import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
 import InputGroup from 'primevue/inputgroup';
 import InputGroupAddon from 'primevue/inputgroupaddon';
-import { ref } from 'vue';
-import axios from 'axios';
-import { useRouter } from 'vue-router';
-import { useAuthStore } from '../stores/auth';
-const authStore = useAuthStore();
-const router = useRouter();
-const form = ref({
-    username: '',
-    password: ''
-});
+import useLogin from '../composables/useLogin';
 
-const handleLogin = async () => {
-    await authStore.getCsrfToken();
-    await axios.post('/auth/login', {
-        username: form.value.username,
-        password: form.value.password,
-    });
-    await authStore.getUser();
-    router.push('/');
-}
+const { form, login } = useLogin();
 </script>
