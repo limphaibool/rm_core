@@ -29,7 +29,7 @@ import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
 import InputGroup from 'primevue/inputgroup';
 import InputGroupAddon from 'primevue/inputgroupaddon';
-import useLogin from '../features/login/useLogin';
+import useLogin from './useLogin.ts';
 
 const { form, login } = useLogin();
 </script>
