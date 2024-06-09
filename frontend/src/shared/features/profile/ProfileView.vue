@@ -2,7 +2,7 @@
 
     <div class="bg-white border-surface-300 border p-6 h-full rounded-xl">
         <div class="text-2xl mb-3">Profile</div>
-        <form class="space-y-4" @submit.prevent="handleSubmit">
+        <form class="space-y-4" @submit.prevent="updateUser">
             <div class="space-x-2">
                 <InputText v-model="user.id" placeholder="ID" disabled />
                 <InputText v-model="user.username" placeholder="Username" disabled />
@@ -24,17 +24,14 @@
 <script setup lang="ts">
 import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
-import { onMounted, reactive } from 'vue';
-import useProfile from '../composables/useProfile';
-
-const { user, getUser } = useProfile();
+import { onMounted } from 'vue';
+import useProfile from './useProfile';
 
 onMounted(() => {
     getUser()
 })
 
-const handleSubmit = () => {
+const { user, getUser, updateUser } = useProfile();
 
-}
 
 </script>

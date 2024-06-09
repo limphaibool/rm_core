@@ -4,9 +4,8 @@ import LoginView from "../views/LoginView.vue";
 import ProfileView from "../views/ProfileView.vue";
 import MainLayout from "../layouts/MainLayout.vue";
 import GuestLayout from "../layouts/GuestLayout.vue";
-import TopBarOnlyLayout from "../layouts/TopBarOnlyLayout.vue";
-import { useAuthStore } from "../stores/auth";
-import { adminRoutes } from "../../admin/routes";
+import { useAuthStore } from "./features/authentication/auth.ts";
+import { adminRoutes } from "../admin/routes";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

@@ -1,8 +1,16 @@
 import { ref } from "vue";
-import { User } from "../interfaces/User";
+import { User } from "../../interfaces/User";
 import axios from "axios";
 export default function useProfile() {
-  const user = ref<User>({});
+  const user = ref<User>({
+    id: 0,
+    username: "",
+    name: "",
+    nameThai: "",
+    nameEng: "",
+    email: "",
+  });
+
   const getUser = async () => {
     try {
       const res = await axios.get<BaseResponse<User>>("/auth/user");
@@ -11,5 +19,7 @@ export default function useProfile() {
       console.log(e);
     }
   };
-  return { user, getUser };
+
+  const updateUser = async () => {};
+  return { user, getUser, updateUser };
 }
