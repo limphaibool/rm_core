@@ -1,6 +1,6 @@
-import RolesListView from "./features/roles/RolesListView.vue";
-import RoleDetailView from "./features/roles/RoleDetailView.vue";
-import UsersListView from "./features/users/UsersListView.vue";
+import RolesListView from "./roles/RolesListView.vue";
+import RoleDetailView from "./roles/RoleDetailView.vue";
+import UsersListView from "./users/UsersListView.vue";
 
 export const adminRoutes = [
   {

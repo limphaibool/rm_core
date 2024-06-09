@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import { useAuthStore } from "./auth.ts";
+import { useAuthStore } from "../../shared/stores/auth.ts";
 import axios from "axios";
 
 export default function useLogin() {

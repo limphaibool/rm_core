@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "./features/home/HomeView.vue";
-import LoginView from "./features/authentication/LoginView.vue";
-import ProfileView from "./features/profile/ProfileView.vue";
+import HomeView from "../core/home/HomeView.vue";
+import LoginView from "../core/login/LoginView.vue";
+import ProfileView from "../core/profile/ProfileView.vue";
 import MainLayout from "./layouts/MainLayout.vue";
 import GuestLayout from "./layouts/GuestLayout.vue";
-import { useAuthStore } from "./features/authentication/auth";
-import { adminRoutes } from "../admin/routes";
+import { useAuthStore } from "./stores/auth";
+import { adminRoutes } from "../core/routes";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
