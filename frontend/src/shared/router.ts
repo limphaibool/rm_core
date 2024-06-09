@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
-import LoginView from "../views/LoginView.vue";
-import ProfileView from "../views/ProfileView.vue";
-import MainLayout from "../layouts/MainLayout.vue";
-import GuestLayout from "../layouts/GuestLayout.vue";
-import { useAuthStore } from "./features/authentication/auth.ts";
+import HomeView from "./features/home/HomeView.vue";
+import LoginView from "./features/authentication/LoginView.vue";
+import ProfileView from "./features/profile/ProfileView.vue";
+import MainLayout from "./layouts/MainLayout.vue";
+import GuestLayout from "./layouts/GuestLayout.vue";
+import { useAuthStore } from "./features/authentication/auth";
 import { adminRoutes } from "../admin/routes";
 
 const router = createRouter({
