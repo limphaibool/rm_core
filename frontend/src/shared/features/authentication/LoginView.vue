@@ -1,4 +1,5 @@
 <template>
+    <Toast />
     <div class="flex-grow flex h-full justify-center items-center">
         <div class="text-center w-full  max-w-lg px-8 py-14 rounded-md ">
             <h1 class="text-4xl font-bold text-left text-primary-500 mb-5">Log In</h1>
@@ -15,7 +16,7 @@
                     </InputGroupAddon>
                     <InputText v-model="form.password" />
                 </InputGroup>
-                <Button class="bg-primary-500" @click="login">
+                <Button class="bg-primary-500" @click="handleLogin">
                     <div class="text-gray-900">
                         Log In
                     </div>
@@ -30,6 +31,22 @@ import Button from 'primevue/button';
 import InputGroup from 'primevue/inputgroup';
 import InputGroupAddon from 'primevue/inputgroupaddon';
 import useLogin from './useLogin.ts';
-
+import Toast from 'primevue/toast';
+import { useToast } from 'primevue/usetoast';
+import { ErrorHandler } from '../../helpers/errorHandler.ts';
+import { useRoute, useRouter } from 'vue-router';
 const { form, login } = useLogin();
+const toast = useToast();
+const router = useRouter();
+
+const handleLogin = async () => {
+    try {
+        await login();
+        router.push('/');
+    } catch (e) {
+        const error = ErrorHandler.handle(e);
+        toast.add({ severity: 'error', summary: 'Error', detail: error.message, life: 3000 });
+    }
+
+}
 </script>

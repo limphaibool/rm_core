@@ -1,7 +1,6 @@
 import { ref } from "vue";
 import { User } from "../../interfaces/User";
 import axios from "axios";
-import { ErrorHandler } from "../../helpers/errorHandler";
 export default function useProfile() {
   const user = ref<User>({
     id: 0,
