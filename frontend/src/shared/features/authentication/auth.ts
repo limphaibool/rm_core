@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-import { UserResponse } from "../../admin/interfaces/responses/UserResponse";
-import { User } from "../interfaces/User";
+import { User } from "../../interfaces/User";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
@@ -17,7 +16,7 @@ export const useAuthStore = defineStore("auth", {
       await axios.get("http://localhost:8000/sanctum/csrf-cookie");
     },
     async getUser() {
-      const res = await axios.get<UserResponse>("/auth/user");
+      const res = await axios.get<BaseResponse<User>>("/auth/user");
       this.authUser = res.data.data;
     },
 
