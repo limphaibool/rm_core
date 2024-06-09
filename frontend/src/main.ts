@@ -6,7 +6,7 @@ import PrimeVue from "primevue/config";
 import Lara from "./shared/presets/lara";
 import App from "./App.vue";
 import "./axios";
-import { useAuthStore } from "../src/shared/features/authentication/auth";
+import { useAuthStore } from "./shared/stores/auth.ts";
 import ToastService from "primevue/toastservice";
 
 const pinia = createPinia();

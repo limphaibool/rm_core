@@ -26,7 +26,7 @@ import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
 import { onMounted } from 'vue';
 import useProfile from './useProfile';
-import { ErrorHandler } from '../../helpers/errorHandler';
+import { ErrorHandler } from '../../shared/helpers/errorHandler';
 import { useToast } from 'primevue/usetoast';
 import Toast from 'primevue/toast';
 

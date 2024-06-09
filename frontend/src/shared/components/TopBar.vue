@@ -17,7 +17,7 @@
 import Button from 'primevue/button';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
-import { useAuthStore } from '../features/authentication/auth';
+import { useAuthStore } from '../stores/auth';
 
 const router = useRouter();
 const authStore = useAuthStore();
