@@ -3,7 +3,7 @@ import axios from "axios";
 export abstract class ErrorHandler {
   public static handle(err: unknown): Error {
     if (axios.isAxiosError<ErrorResponse>(err)) {
-      if (err.response?.data.status == 2) {
+      if (err.response?.data.status == 3) {
         return new Error("User is unauthenticated");
       }
     }
