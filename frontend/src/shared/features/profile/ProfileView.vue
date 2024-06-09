@@ -26,9 +26,14 @@ import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
 import { onMounted } from 'vue';
 import useProfile from './useProfile';
+import { ErrorHandler } from '../../helpers/errorHandler';
 
-onMounted(() => {
-    getUser()
+onMounted(async () => {
+    try {
+        user.value = await getUser();
+    } catch (e) {
+        const error = ErrorHandler.handle(e);
+    }
 })
 
 const { user, getUser, updateUser } = useProfile();
