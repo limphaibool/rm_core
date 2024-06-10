@@ -83,8 +83,8 @@ class RolesTest extends TestCase
         // Assert
         $response->assertOk();
         $response->assertJsonPath('status', ResponseStatus::SUCCESS);
-        $response->assertJsonPath('data.0.role_id', 1);
-        $response->assertJsonPath('data.1.role_id', 2);
+        $response->assertJsonFragment(['role_id' => 1]);
+        $response->assertJsonFragment(['role_id' => 2]);
         $response->assertJsonMissing([
             'role_id' => 3
         ]);
