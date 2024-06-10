@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import { User } from "../../interfaces/User";
+import { User } from "../../shared/interfaces/User";
 import axios from "axios";
 export default function useProfile() {
   const user = ref<User>({
