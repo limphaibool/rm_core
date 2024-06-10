@@ -5,32 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Traits\HttpResponses;
+use App\Http\Requests\RoleRequest;
 use Illuminate\Support\Facades\Auth;
 
 class RoleController extends Controller
 {
+    use HttpResponses;
     /**
      * Returns all roles that have <= permissions
      */
     public function index()
     {
-        // return response()->json([
-        //     'status' => 1,
-        //     'message' => 'Success',
-        //     'data' => 'ok'
-        // ], 200);
-        // return Role::find(Auth::user()->user_id);
-        $query = Role::leftJoin('users', 'roles.role_id', '=', 'users.role_id')
-            ->select(
-                'roles.*',
-            )
-            ->where('users.enabled', 1)
-            ->orWhere('roles.parent_id', 8)
-            ->get();
-            // if (!empty($selectedCategory)) {
-            //     $query->where('products.category_id', '=', $selectedCategory);
-            // }
-        return $query;
+        $roles = Role::find(Auth::user()->role_id)->childrenAndSelf()->get();
+        return $this->success(data: $roles);
     }
 
     /**
@@ -41,15 +29,11 @@ class RoleController extends Controller
         $role_name = $request->role_name;
         $parent_id = $request->parent_id;
         try {
-            Role::create([
+            $role = Role::create([
                 'role_name' => $role_name,
                 'parent_id' => $parent_id,
             ]);
-            return response()->json([
-                'status' => 1,
-                'message' => 'Create Role Success',
-                'data' => $role_name
-            ], 200);
+            return $this->success(message: 'Create Role Success', data: $role);
         } catch (Exception $e) {
             return response()->json(['status' => 2, 'message' => $e], 401);
         }
@@ -66,7 +50,7 @@ class RoleController extends Controller
                 'status' => 2,
                 'message' => 'Role not found'
             ], 404);
-        }else{
+        } else {
             $role_name = $request->role_name;
             $parent_id = $request->parent_id;
             $Role->update([
@@ -91,7 +75,7 @@ class RoleController extends Controller
                 'status' => 2,
                 'message' => 'Role not found'
             ], 404);
-        }else{
+        } else {
             $Role->delete();
             return response()->json([
                 'status' => 1,
