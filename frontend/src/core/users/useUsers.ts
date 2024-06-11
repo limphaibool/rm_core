@@ -6,10 +6,9 @@ export default function useUsers() {
   const users = ref<User[]>([]);
   const getUsers = async () => {
     try {
-      const res = await axios.get<BaseResponse<User[]>>("/admin/users");
+      const res = await axios.get<DataResponse<User[]>>("/admin/users");
       users.value = res.data.data;
-    } catch (e) {
-    }
+    } catch (e) {}
   };
   const getUserById = async () => {};
 
