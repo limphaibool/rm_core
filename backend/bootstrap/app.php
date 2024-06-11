@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\ResponseStatus;
+use Dotenv\Exception\ValidationException;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Application;
 use Illuminate\Auth\AuthenticationException;
@@ -19,7 +20,28 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->statefulApi();
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        $exceptions->render(function (AuthenticationException $e, Request $request) {
+        $exceptions
+            ->render(function (AuthenticationException $e, Request $request) {
+                if ($request->is('api/*')) {
+                    return response()->json([
+                        'status' => ResponseStatus::UNAUTHENTICATED,
+                        'message' => 'Unauthenticated',
+                        'data' => null
+                    ], Response::HTTP_UNAUTHORIZED);
+                }
+            })
+            ->render(function (\Illuminate\Validation\ValidationException $e, Request $request) {
+                if ($request->is('api/*')) {
+                    return response()->json([
+                        'status' => ResponseStatus::FORM_INVALID,
+                        'message' => 'Form invalid',
+                        'data' => $e->validator->errors()->all()
+                    ], Response::HTTP_BAD_REQUEST);
+                }
+
+            })
+        ;
+        $exceptions->render(function (ValidationException $e, Request $request) {
             if ($request->is('api/*')) {
                 return response()->json([
                     'status' => ResponseStatus::UNAUTHENTICATED,
@@ -27,5 +49,6 @@ return Application::configure(basePath: dirname(__DIR__))
                     'data' => null
                 ], Response::HTTP_UNAUTHORIZED);
             }
+
         });
     })->create();
