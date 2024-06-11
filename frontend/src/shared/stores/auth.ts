@@ -16,7 +16,7 @@ export const useAuthStore = defineStore("auth", {
       await axios.get("http://localhost:8000/sanctum/csrf-cookie");
     },
     async getUser() {
-      const res = await axios.get<BaseResponse<User>>("/auth/user");
+      const res = await axios.get<DataResponse<User>>("/auth/user");
       this.authUser = res.data.data;
     },
 
