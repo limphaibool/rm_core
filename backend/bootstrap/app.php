@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\ResponseStatus;
+use App\Http\Middleware\ConvertToSnakeCaseMiddleware;
 use Dotenv\Exception\ValidationException;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Application;
@@ -18,6 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->statefulApi();
+        $middleware->append(ConvertToSnakeCaseMiddleware::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions
