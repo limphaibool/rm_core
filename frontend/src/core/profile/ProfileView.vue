@@ -13,8 +13,9 @@
             </div>
             <div class="space-x-2">
                 <InputText v-model="user.email" placeholder="Email" />
+                <span v-if="errors.email">{{ errors.email }}</span>
             </div>
-            <Button label="Save" @click="handleUserLogin" />
+            <Button type="submit" label="Save" />
 
         </form>
 
@@ -26,28 +27,13 @@ import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
 import { onMounted } from 'vue';
 import useProfile from './useProfile';
-import { ErrorHandler } from '../../shared/helpers/errorHandler';
-import { useToast } from 'primevue/usetoast';
 import Toast from 'primevue/toast';
 
-
-const toast = useToast();
-
 onMounted(async () => {
-    try {
-        user.value = await getUser();
-    } catch (e) {
-        const error = ErrorHandler.handle(e);
-        toast.add({ severity: 'error', summary: 'Error', detail: error.message, life: 3000 });
-    }
+    await getUser();
 })
 
-const handleUserLogin = () => {
-    console.log("click");
-
-}
-
-const { user, getUser, updateUser } = useProfile();
+const { user, errors, getUser, updateUser } = useProfile();
 
 
 </script>

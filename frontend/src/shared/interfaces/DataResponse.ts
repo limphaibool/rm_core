@@ -1,5 +1,5 @@
-interface BaseResponse {
+interface DataResponse<T> {
   status: number;
   message: string;
-  data: any;
+  data: T;
 }
