@@ -44,7 +44,7 @@ class AuthenticationTest extends TestCase
         // Assert
         $response->assertOk();
         $response->assertJsonPath('status', ResponseStatus::SUCCESS);
-        $response->assertJsonPath('data.userId', $user->user_id);
+        $response->assertJsonPath('data.id', $user->user_id);
         $this->assertAuthenticatedAs($user);
         $response->assertCookie('laravel_session');
         $response->assertCookie('XSRF-TOKEN');
@@ -148,9 +148,9 @@ class AuthenticationTest extends TestCase
 
         $response = $this->actingAs($user)->get('/api/auth/user');
         $response->assertOk();
-        $response->assertJsonPath('data.userId', $user->user_id);
+        $response->assertJsonPath('data.id', $user->user_id);
         $response->assertJsonPath('data.username', $user->username);
-        $response->assertJsonPath('data.role.roleId', $role->role_id);
+        $response->assertJsonPath('data.role.id', $role->role_id);
     }
 
     public function test_auth_user_update_user_success()
@@ -182,10 +182,10 @@ class AuthenticationTest extends TestCase
             'name_eng' => 'test',
         ]);
 
-        $response->assertJsonPath('data.userId', $user->user_id);
+        $response->assertJsonPath('data.id', $user->user_id);
         $response->assertJsonPath('data.nameThai', 'เทส');
         $response->assertJsonPath('data.nameEng', 'test');
-        $response->assertJsonPath('data.role.roleId', $role->role_id);
+        $response->assertJsonPath('data.role.id', $role->role_id);
     }
 
     public function test_auth_user_update_user_validate()
