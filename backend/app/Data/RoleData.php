@@ -11,9 +11,9 @@ use Spatie\LaravelData\Attributes\Validation\Required;
 class RoleData extends Data
 {
     public function __construct(
-        #[MapName('role_id')]
+        #[MapInputName('role_id')]
         public int $id,
-        #[MapName('role_name')]
+        #[MapInputName('role_name')]
         public string $name
     ) {
     }
