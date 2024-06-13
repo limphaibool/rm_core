@@ -95,7 +95,7 @@ class RolesTest extends TestCase
             'role_id' => 2
         ]);
     }
-    public function test_roles_update_only_child_roles(): void
+    public function test_roles_update_success(): void
     {
         // Arrange
         Role::create([
@@ -134,8 +134,52 @@ class RolesTest extends TestCase
         ]);
         // Assert
         $response->assertOk();
+        $this->assertDatabaseHas('roles', ['role_name' => 'test edit']);
         $response->assertJsonPath('status', ResponseStatus::SUCCESS);
-        $response->assertJsonFragment(['data' => 'test edit']);
+        $response->assertJsonPath('data.role_id', 2);
+        $response->assertJsonPath('data.role_name', 'test edit');
+    }
+
+    public function test_roles_update_can_not_update_self(): void
+    {
+        // Arrange
+        Role::create([
+            'role_id' => 1,
+            'role_name' => 'user role',
+            'parent_id' => null,
+        ]);
+        Role::create([
+            'role_id' => 2,
+            'role_name' => 'child role',
+            'parent_id' => 1,
+        ]);
+        Role::create([
+            'role_id' => 3,
+            'role_name' => 'role 2',
+            'parent_id' => null,
+        ]);
+        Role::create([
+            'role_id' => 4,
+            'role_name' => 'child role 2',
+            'parent_id' => 3,
+        ]);
+        $user = User::create([
+            'name' => 'Thiti Lim',
+            'username' => 'thiti',
+            'password' => '1234',
+            'name_thai' => 'ธิติ',
+            'name_eng' => 'Thiti',
+            'email' => 'thiti@thiti.com',
+            'role_id' => 1,
+            'enabled' => true,
+        ]);
+        // Act
+        $response = $this->actingAs($user)->patch('/api/admin/roles/1', [
+            'role_name' => 'test edit'
+        ]);
+        // Assert
+        $response->assertBadRequest();
+        $response->assertJsonPath('status', ResponseStatus::ERROR);
     }
     public function test_roles_delete_only_child_roles(): void
     {
@@ -175,7 +219,7 @@ class RolesTest extends TestCase
         // Assert
         $response->assertOk();
         $response->assertJsonPath('status', ResponseStatus::SUCCESS);
-        $response->assertJsonFragment(['role_id' => 2]);
     }
+
 }
 

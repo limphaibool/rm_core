@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ResponseStatus;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -9,6 +10,7 @@ use App\Traits\HttpResponses;
 use App\Http\Requests\RoleRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
 class RoleController extends Controller
 {
     use HttpResponses;
@@ -46,20 +48,23 @@ class RoleController extends Controller
     }
     public function update(Request $request, $id)
     {
-        $Role = Role::find(Auth::user()->role_id);
-        if (!$Role) {
-            return $this->error(data: "ไม่สามารถ update ได้");
-        } else {
-            $roles = Role::find(Auth::user()->role_id)->descendantsAndSelf()->where('role_id', $id)->get()->count();
-            if($roles > 0){
-                $Role_update = $role_name = $request->role_name;
-                Role::where('role_id', $id)->update([
+        $is_child_role = Role::find(Auth::user()->role_id)->descendants()->where('role_id', $id)->exists();
+        if ($is_child_role) {
+            $role_name = $request->role_name;
+            try {
+                $update = Role::where('role_id', $id)->update([
                     'role_name' => $role_name
                 ]);
-                return $this->success(data: $Role_update);
-            }else{
+            } catch (Exception $e) {
                 return $this->error(data: "ไม่สามารถ update ได้");
             }
+            if (!$update) {
+                return $this->error(data: "ไม่สามารถ update ได้");
+            }
+            $role_update = Role::find($id);
+            return $this->success(data: $role_update);
+        } else {
+            return $this->error(data: "ไม่สามารถ update ได้");
         }
     }
 
@@ -68,29 +73,29 @@ class RoleController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $Role = Role::find($id);
-        if (!$Role) {
+        $role = Role::find($id);
+        if (!$role) {
             return response()->json([
-                'status' => 2,
+                'status' => ResponseStatus::NOT_FOUND,
                 'message' => 'Role not found'
             ], 404);
         } else {
-            $check_descendants = Role::find(Auth::user()->role_id)->descendants()->where('role_id',$id)->get()->count();
+            $is_descendant = Role::find(Auth::user()->role_id)->descendants()->where('role_id', $id)->exists();
             // return $this->success(data: $check_descendants);
-            if($check_descendants > 0){
-                $check_mother = Role::find($id)->descendants()->get()->count();
+            if ($is_descendant) {
+                $is_mother = Role::find($id)->descendants()->exists();
                 // return $this->success(data: $check_mother);
-                if($check_mother == 0){
-                    $Role->delete();
+                if (!$is_mother) {
+                    $role->delete();
                     // $User_update = User::where("role_id",$id)->get();
-                    $User_update = User::where("role_id",$id)->update([
+                    User::where("role_id", $id)->update([
                         'role_id' => null
                     ]);
-                    return $this->success(data: $Role);
-                }else{
+                    return $this->success(message: "Delete success");
+                } else {
                     return $this->error(data: "ไม่สามารถลบได้");
                 }
-            }else{
+            } else {
                 return $this->error(data: "ไม่สามารถลบได้");
             }
         }
