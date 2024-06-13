@@ -38,7 +38,7 @@ class UserData extends Data
             name_eng: $user->name_eng,
             email: $user->email,
             enabled: $user->enabled,
-            role: RoleData::from($user->role) // Mapping the Role model to RoleData
+            role: $user->role != null ? RoleData::from($user->role) : null
         );
     }
 
