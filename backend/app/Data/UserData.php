@@ -18,7 +18,7 @@ use Spatie\LaravelData\Support\Validation\ValidationContext;
 class UserData extends Data
 {
     public function __construct(
-        #[MapName('user_id')]
+        #[MapInputName('user_id')]
         public int $id,
         public string $username,
         public string $name_thai,
