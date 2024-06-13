@@ -16,14 +16,12 @@ class BaseResource extends JsonResource
      */
     protected function toCamelCase($array)
     {
-        $camelCaseArray = [];
+        $result = [];
         foreach ($array as $key => $value) {
-            // Here we use the Str::camel() method from Laravel
             $camelKey = Str::camel($key);
-            // Recursively convert nested arrays
-            $camelCaseArray[$camelKey] = is_array($value) ? $this->toCamelCase($key) : $value;
+            $result[$camelKey] = is_array($value) ? $this->toCamelCase($value) : $value;
         }
-        return $camelCaseArray;
+        return $result;
     }
 
     /**
