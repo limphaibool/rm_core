@@ -9,4 +9,5 @@ abstract class ResponseStatus
     const UNAUTHENTICATED = 3;
     const UNAUTHORIZED = 4;
     const FORM_INVALID = 5;
+    const NOT_FOUND = 6;
 }

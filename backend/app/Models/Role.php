@@ -12,6 +12,7 @@ class Role extends Model
 {
     use HasFactory, HasRecursiveRelationships;
     protected $fillable = [
+        'role_id',
         'role_name',
         'parent_id'
     ];
