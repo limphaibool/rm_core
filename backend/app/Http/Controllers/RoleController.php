@@ -11,6 +11,7 @@ use App\Traits\HttpResponses;
 use App\Http\Requests\RoleRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Exception;
 
 class RoleController extends Controller
 {
@@ -38,7 +39,7 @@ class RoleController extends Controller
             ]);
             return $this->success(message: 'Create Role Success', data: $role);
         } catch (Exception $e) {
-            return response()->json(['status' => 2, 'message' => $e], 401);
+            return $this->error(message: $e);
         }
     }
 
