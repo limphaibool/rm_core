@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col min-h-screen bg-gradient-to-br from-primary-200 to-white">
+    <div class="flex flex-col min-h-screen bg-gradient-to-br from-primary-50 to-white">
         <TopBar />
         <div class="flex-grow flex ">
             <MenuBar :menus="menuItems" />
