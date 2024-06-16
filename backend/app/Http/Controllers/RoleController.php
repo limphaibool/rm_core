@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Data\RoleData;
 use App\Enums\ResponseStatus;
 use App\Models\Role;
 use App\Models\User;
@@ -20,7 +21,7 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::find(Auth::user()->role_id)->descendantsAndSelf()->get();
-        return $this->success(data: $roles);
+        return $this->success(data: RoleData::collect($roles));
     }
 
     /**

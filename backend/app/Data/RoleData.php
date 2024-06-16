@@ -14,7 +14,9 @@ class RoleData extends Data
         #[MapInputName('role_id')]
         public int $id,
         #[MapInputName('role_name')]
-        public string $name
+        public string $name,
+        public ?int $parent_id,
+        public bool $enabled,
     ) {
     }
 }
