@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white shadow-gray-400 p-3 w-72 mt-6 mb-6 ml-5 rounded-xl shadow-sm flex flex-col">
+    <div class="bg-white shadow-gray-400 p-3 w-72 mt-6 mb-6 ml-5 rounded-md shadow-sm flex flex-col">
         <Menu :model="menus" class="border-0 text-xl" />
     </div>
 </template>
