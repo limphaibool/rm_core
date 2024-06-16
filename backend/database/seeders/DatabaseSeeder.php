@@ -17,6 +17,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        Role::updateOrCreate(['role_id' => 1, 'role_name' => 'admin', 'parent_id' => null]);
+        Role::updateOrCreate(['role_id' => 2, 'role_name' => 'child 1', 'parent_id' => 1]);
+        Role::updateOrCreate(['role_id' => 3, 'role_name' => 'admin 2', 'parent_id' => null]);
+        Role::updateOrCreate(['role_id' => 4, 'role_name' => 'child 1.2', 'parent_id' => 1]);
+        Role::updateOrCreate(['role_id' => 5, 'role_name' => 'child 1.3', 'parent_id' => 1]);
+        Role::updateOrCreate(['role_id' => 6, 'role_name' => 'child 2', 'parent_id' => 3]);
+        Role::updateOrCreate(['role_id' => 7, 'role_name' => 'child 4.1', 'parent_id' => 4]);
         User::updateOrCreate(['user_id' => 1], [
             'user_id' => 1,
             'name' => 'Thiti Lim',
@@ -24,6 +31,7 @@ class DatabaseSeeder extends Seeder
             'password' => '1234',
             'name_thai' => 'ธิติ',
             'name_eng' => 'Thiti',
+            'role_id' => 1,
             'email' => 'thiti@thiti.com',
         ]);
 
