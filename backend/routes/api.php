@@ -26,7 +26,7 @@ Route::prefix('auth')->middleware('auth:sanctum')->group(function () {
     Route::patch('user', [AuthUserController::class, 'update']);
 });
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
     Route::resource('/users', UserController::class);
     // Route::get('/users', [UserController::class, 'index']);
     // Route::post('/users', [UserController::class, 'store']);
