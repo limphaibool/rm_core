@@ -21,8 +21,8 @@ export default {
       },
 
       // Color
-      "border-0 border-surface-200 dark:border-surface-700",
-      "bg-white dark:bg-surface-800",
+      "border border-surface-200 dark:border-surface-700",
+      "bg-surface-50 dark:bg-surface-800",
       "text-surface-600 dark:text-surface-0/80",
       { "text-surface-900": context.active },
 
@@ -47,7 +47,7 @@ export default {
       "flex items-center",
 
       // Spacing
-      "p-4",
+      "p-5",
 
       // Misc
       "select-none cursor-pointer no-underline",
@@ -68,7 +68,7 @@ export default {
       "py-2",
 
       // Shape
-      "border-0 border-t-0",
+      "border border-t-0",
       "rounded-t-none rounded-br-md rounded-bl-md",
 
       // Color
