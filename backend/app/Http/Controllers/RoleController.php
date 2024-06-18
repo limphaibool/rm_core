@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Data\RoleData;
 use App\Enums\ResponseStatus;
+use App\Http\Resources\RoleResource;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::find(Auth::user()->role_id)->descendantsAndSelf()->get();
-        return $this->success(data: RoleData::collect($roles));
+        return $this->success(data: RoleResource::collection(RoleData::collect($roles)));
     }
 
     /**
@@ -45,8 +46,8 @@ class RoleController extends Controller
 
     public function show($id)
     {
-        $roles = Role::find(Auth::user()->role_id)->descendantsAndSelf()->where('role_id', $id)->get();
-        return $this->success(data: $roles);
+        $role = Role::find(Auth::user()->role_id)->descendantsAndSelf()->where('role_id', $id)->first();
+        return $this->success(data: RoleData::from($role));
     }
     public function update(Request $request, $id)
     {
