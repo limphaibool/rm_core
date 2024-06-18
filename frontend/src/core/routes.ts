@@ -7,10 +7,30 @@ export const adminRoutes = [
   {
     path: "/admin",
     children: [
-      { path: "roles", name: "role.list", component: RoleListView },
-      { path: "roles/new", name: "role.create", component: RoleCreateView },
-      { path: "roles/:id", name: "role.get", component: RoleGetView },
-      { path: "users", name: "users", component: UsersListView },
+      {
+        path: "roles",
+        name: "role.list",
+        component: RoleListView,
+        meta: { title: "Roles" },
+      },
+      {
+        path: "roles/new",
+        name: "role.create",
+        component: RoleCreateView,
+        meta: { title: "เพิ่ม role" },
+      },
+      {
+        path: "roles/:id",
+        name: "role.get",
+        component: RoleGetView,
+        meta: { title: "Role detail" },
+      },
+      {
+        path: "users",
+        name: "users",
+        component: UsersListView,
+        meta: { title: "Users" },
+      },
     ],
   },
 ];
