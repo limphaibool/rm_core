@@ -22,8 +22,9 @@ class DatabaseSeeder extends Seeder
         Role::updateOrCreate(['role_id' => 3, 'role_name' => 'admin 2', 'parent_id' => null]);
         Role::updateOrCreate(['role_id' => 4, 'role_name' => 'child 1.2', 'parent_id' => 1]);
         Role::updateOrCreate(['role_id' => 5, 'role_name' => 'child 1.3', 'parent_id' => 1]);
-        Role::updateOrCreate(['role_id' => 6, 'role_name' => 'child 2', 'parent_id' => 3]);
+        Role::updateOrCreate(['role_id' => 6, 'role_name' => 'child 2', 'parent_id' => 5]);
         Role::updateOrCreate(['role_id' => 7, 'role_name' => 'child 4.1', 'parent_id' => 4]);
+        Role::factory(50)->create();
         User::updateOrCreate(['user_id' => 1], [
             'user_id' => 1,
             'name' => 'Thiti Lim',
