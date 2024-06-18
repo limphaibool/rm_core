@@ -22,11 +22,10 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'username' => ['string', 'required', 'sometimes', 'unique', 'max:20'],
-            'name_thai' => ['string', 'required', 'sometimes'],
-            'name_eng' => ['string', 'required', 'sometimes'],
-            'email' => ['email', 'required', 'sometimes'],
-            'role_id' => ['integer', 'required', 'sometimes'],
+            'name_thai' => ['string', 'required'],
+            'name_eng' => ['string', 'required'],
+            'email' => ['email', 'required'],
+            'role_id' => ['integer', 'required'],
         ];
     }
 }

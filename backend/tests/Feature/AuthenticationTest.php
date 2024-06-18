@@ -171,9 +171,12 @@ class AuthenticationTest extends TestCase
             'role_id' => $role->role_id
         ]);
 
-        $response = $this->actingAs($user)->patch('/api/auth/user', [
+        $response = $this->actingAs($user)->put('/api/auth/user', [
             'nameThai' => 'เทส',
             'nameEng' => 'test',
+            'email' => 'thiti@thiti.com',
+            'enabled' => true,
+            'role_id' => $role->role_id
         ]);
         $response->assertOk();
         $this->assertDatabaseHas('users', [
@@ -206,9 +209,40 @@ class AuthenticationTest extends TestCase
             'role_id' => $role->role_id
         ]);
 
-        $response = $this->actingAs($user)->patch('/api/auth/user', [
+        $response = $this->actingAs($user)->put('/api/auth/user', [
             'nameThai' => '',
             'nameEng' => 'test',
+            'email' => 'thiti@thiti.com',
+            'enabled' => true,
+            'role_id' => $role->role_id
+        ]);
+        $response->assertBadRequest();
+        $response->assertJsonPath('status', ResponseStatus::FORM_INVALID);
+        $response->assertJsonIsArray('data');
+    }
+
+    public function test_auth_user_update_user_missing_fields_throw_error()
+    {
+        $role = Role::create([
+            'role_id' => 1,
+            'role_name' => 'test role'
+        ]);
+        $user = User::create([
+            'user_id' => 1,
+            'name' => 'Thiti Lim',
+            'username' => 'thiti',
+            'password' => '1234',
+            'name_thai' => 'ธิติ',
+            'name_eng' => 'Thiti',
+            'email' => 'thiti@thiti.com',
+            'enabled' => true,
+            'role_id' => $role->role_id
+        ]);
+
+        $response = $this->actingAs($user)->put('/api/auth/user', [
+            'nameEng' => 'test',
+            'enabled' => true,
+            'role_id' => $role->role_id
         ]);
         $response->assertBadRequest();
         $response->assertJsonPath('status', ResponseStatus::FORM_INVALID);
