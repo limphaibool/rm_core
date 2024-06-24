@@ -13,7 +13,9 @@ class Role extends Model
     protected $fillable = [
         'role_id',
         'role_name',
-        'parent_id'
+        'parent_id',
+        'description',
+        'enabled',
     ];
     public function getLocalKeyName()
     {

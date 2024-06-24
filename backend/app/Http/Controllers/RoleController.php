@@ -29,42 +29,60 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $role_name = $request->role_name;
-        $parent_id = Auth::user()->role_id;
-        try {
-            $role = Role::create([
-                'role_name' => $role_name,
-                'parent_id' => $parent_id,
-            ]);
-            return $this->success(message: 'Create Role Success', data: $role);
-        } catch (Exception $e) {
-            return response()->json(['status' => 2, 'message' => $e], 401);
+        $parent_id = $request->parent_id;
+        $is_descendantsAndSelf = Role::find(Auth::user()->role_id)->descendantsAndSelf()->where('role_id',$parent_id)->exists();
+        if($is_descendantsAndSelf){
+            try {
+                $role = Role::create([
+                    'role_name' => $role_name,
+                    'parent_id' => $parent_id,
+                    'enabled' => 1
+                ]);
+                return $this->success(message: 'Create Role Success', data: $role);
+            } catch (Exception $e) {
+                return response()->json(['status' => 2, 'message' => $e], 401);
+            }
+        }else{
+            return $this->error(message: "ไม่สามารถสร้าง Role ได้");
         }
     }
 
     public function show($id)
     {
-        $roles = Role::find(Auth::user()->role_id)->descendantsAndSelf()->where('role_id', $id)->get();
-        return $this->success(data: $roles);
+        $is_descendantsAndSelf = Role::find(Auth::user()->role_id)->descendantsAndSelf()->where('role_id', $id)->exists();
+        if($is_descendantsAndSelf){
+            $roles = Role::find(Auth::user()->role_id)->descendantsAndSelf()->where('role_id', $id)->get();
+            return $this->success(data: $roles);
+        }else{
+            return response()->json([
+                'status' => ResponseStatus::NOT_FOUND,
+                'message' => 'Role not found'
+            ], 404);
+        }
     }
     public function update(Request $request, $id)
     {
         $is_child_role = Role::find(Auth::user()->role_id)->descendants()->where('role_id', $id)->exists();
         if ($is_child_role) {
             $role_name = $request->role_name;
+            $parent_id = $request->parent_id;
+            $enabled = $request->enabled;
             try {
                 $update = Role::where('role_id', $id)->update([
-                    'role_name' => $role_name
+                    'role_name' => $role_name,
+                    'parent_id' => $parent_id,
+                    'enabled' => $enabled
                 ]);
             } catch (Exception $e) {
-                return $this->error(data: "ไม่สามารถ update ได้");
+                return $this->error(message: "ไม่สามารถ update ได้");
             }
             if (!$update) {
-                return $this->error(data: "ไม่สามารถ update ได้");
+                return $this->error(message: "ไม่สามารถ update ได้");
             }
             $role_update = Role::find($id);
             return $this->success(data: $role_update);
         } else {
-            return $this->error(data: "ไม่สามารถ update ได้");
+            return $this->error(message: "ไม่สามารถ update ได้");
         }
     }
 
@@ -81,22 +99,19 @@ class RoleController extends Controller
             ], 404);
         } else {
             $is_descendant = Role::find(Auth::user()->role_id)->descendants()->where('role_id', $id)->exists();
-            // return $this->success(data: $check_descendants);
             if ($is_descendant) {
                 $is_mother = Role::find($id)->descendants()->exists();
-                // return $this->success(data: $check_mother);
                 if (!$is_mother) {
                     $role->delete();
-                    // $User_update = User::where("role_id",$id)->get();
                     User::where("role_id", $id)->update([
                         'role_id' => null
                     ]);
                     return $this->success(message: "Delete success");
                 } else {
-                    return $this->error(data: "ไม่สามารถลบได้");
+                    return $this->error(message: "ไม่สามารถลบได้ เนื่องจากยังมี Role ลูก");
                 }
             } else {
-                return $this->error(data: "ไม่สามารถลบได้");
+                return $this->error(message: "ไม่สามารถลบได้");
             }
         }
     }

@@ -14,6 +14,8 @@ return new class extends Migration {
             $table->id('role_id');
             $table->string('role_name');
             $table->unsignedBigInteger('parent_id')->nullable();
+            $table->string('description')->nullable();
+            $table->boolean('enabled')->nullable();
             $table->timestamps();
         });
     }
