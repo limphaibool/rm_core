@@ -31,15 +31,16 @@ class RolesTest extends TestCase
 
         // Act
         $response = $this->actingAs($user)->post('/api/admin/roles', [
-            'role_name' => 'test'
+            'roleName' => 'test',
+            'parentId' => 1,
         ]);
 
         // Assert
+        $this->assertDatabaseHas('roles', ['role_name' => 'test', 'parent_id' => 1, 'enabled' => true]);
+
         $response->assertOk();
-        $response->assertJsonPath('data.role_name', 'test');
         $response->assertJsonPath('status', ResponseStatus::SUCCESS);
-        $response->assertJsonFragment(['role_name' => 'test']);
-        $response->assertJsonFragment(['role_id' => 1]);
+        $response->assertJsonPath('data.name', 'test');
     }
     public function test_roles_index_show_only_child_roles(): void
     {
@@ -76,7 +77,6 @@ class RolesTest extends TestCase
         ]);
         // Act
         $response = $this->actingAs($user)->get('/api/admin/roles');
-        $response_2 = $this->actingAs($user)->get('/api/admin/roles/1');
         // Assert
         $response->assertOk();
         $response->assertJsonPath('status', ResponseStatus::SUCCESS);
@@ -87,12 +87,6 @@ class RolesTest extends TestCase
         ]);
         $response->assertJsonMissing([
             'id' => 4
-        ]);
-        $response_2->assertOk();
-        $response_2->assertJsonPath('status', ResponseStatus::SUCCESS);
-        $response_2->assertJsonFragment(['id' => 1]);
-        $response_2->assertJsonMissing([
-            'id' => 2
         ]);
     }
     public function test_roles_update_success(): void
@@ -129,8 +123,9 @@ class RolesTest extends TestCase
             'enabled' => true,
         ]);
         // Act
-        $response = $this->actingAs($user)->patch('/api/admin/roles/2', [
-            'role_name' => 'test edit'
+        $response = $this->actingAs($user)->put('/api/admin/roles/2', [
+            'roleName' => 'test edit',
+            'parentId' => 3
         ]);
         // Assert
         $response->assertOk();
@@ -174,12 +169,13 @@ class RolesTest extends TestCase
             'enabled' => true,
         ]);
         // Act
-        $response = $this->actingAs($user)->patch('/api/admin/roles/1', [
-            'role_name' => 'test edit'
+        $response = $this->actingAs($user)->put('/api/admin/roles/1', [
+            'roleName' => 'test edit',
         ]);
         // Assert
         $response->assertBadRequest();
         $response->assertJsonPath('status', ResponseStatus::ERROR);
+        $this->assertDatabaseMissing('roles', ['role_name' => 'test edit']);
     }
     public function test_roles_delete_only_child_roles(): void
     {

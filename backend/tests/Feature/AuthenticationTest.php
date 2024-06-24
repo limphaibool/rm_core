@@ -186,8 +186,8 @@ class AuthenticationTest extends TestCase
         ]);
 
         $response->assertJsonPath('data.id', $user->user_id);
-        $response->assertJsonPath('data.nameThai', 'เทส');
-        $response->assertJsonPath('data.nameEng', 'test');
+        $response->assertJsonPath('data.name_thai', 'เทส');
+        $response->assertJsonPath('data.name_eng', 'test');
         $response->assertJsonPath('data.role.id', $role->role_id);
     }
 
