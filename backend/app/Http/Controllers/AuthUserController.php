@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Data\UserData;
 use App\Http\Requests\UserRequest;
-use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Traits\HttpResponses;
 use Dotenv\Exception\ValidationException;
@@ -20,14 +19,14 @@ class AuthUserController extends Controller
     public function show()
     {
         $user = UserData::from(Auth::user());
-        return $this->success(data: new UserResource($user));
+        return $this->success(data: $user);
     }
 
     public function update(UserRequest $userRequest)
     {
         Auth::user()->update($userRequest->only('name_thai', 'name_eng', 'email'));
         $user = UserData::from(Auth::user());
-        return $this->success('User update success', new UserResource($user));
+        return $this->success('User update success', $user);
     }
 
 }

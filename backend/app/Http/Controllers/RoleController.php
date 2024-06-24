@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Data\RoleData;
 use App\Enums\ResponseStatus;
-use App\Http\Resources\RoleResource;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -23,24 +22,20 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::find(Auth::user()->role_id)->descendantsAndSelf()->get();
-        return $this->success(data: RoleResource::collection(RoleData::collect($roles)));
+        return $this->success(data: RoleData::collect($roles));
     }
 
     /**
      * Create a new role
      */
-    public function store(Request $request)
+    public function store(RoleRequest $request)
     {
-        $role_name = $request->role_name;
-        $parent_id = Auth::user()->role_id;
         try {
-            $role = Role::create([
-                'role_name' => $role_name,
-                'parent_id' => $parent_id,
-            ]);
+            $new_role = Role::create($request->only('role_name', 'parent_id'));
+            $role = RoleData::from(Role::find($new_role->role_id));
             return $this->success(message: 'Create Role Success', data: $role);
         } catch (Exception $e) {
-            return $this->error(message: $e);
+            return $this->error(message: $e->getMessage());
         }
     }
 
@@ -49,7 +44,8 @@ class RoleController extends Controller
         $role = Role::find(Auth::user()->role_id)->descendantsAndSelf()->where('role_id', $id)->first();
         return $this->success(data: RoleData::from($role));
     }
-    public function update(Request $request, $id)
+
+    public function update(RoleRequest $request, $id)
     {
         $is_child_role = Role::find(Auth::user()->role_id)->descendants()->where('role_id', $id)->exists();
         if ($is_child_role) {
